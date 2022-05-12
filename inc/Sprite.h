@@ -4,28 +4,34 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 
-#include "SDL_include.h"
+#define SPRITE_TYPE "Sprite"
+
 #include <iostream>
+#include "SDL_include.h"
+#include "Component.h"
+#include "GameObject.h"
 
 using namespace std;
 
-class Sprite {
+class Sprite : public Component {
 private:
-    SDL_Texture * texture;
+    SDL_Texture *texture;
     int width;
     int height;
     SDL_Rect clipRect;
 
 public:
-    Sprite();
-    Sprite(string file);
-    ~Sprite();
+    Sprite(GameObject &gameObject);
+    Sprite(GameObject &gameObject, string file);
+    ~Sprite() override;
     void Open(string file);
     void SetClip(int x, int y, int width, int height);
-    void Render(int x, int y);
+    void Render() override;
     int GetWidth();
     int GetHeight();
     bool IsOpen();
+    void Update(float dt) override;
+    bool Is(string type) override;
 };
 
 #endif

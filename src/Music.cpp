@@ -14,24 +14,21 @@ Music::~Music(){
 }
 
 void Music::Play(int times = -1){
-  if (!music){
+  if (!music)
     throw("nullptr music");
-  }
-  if (Mix_PlayMusic(music, times)){
+
+  if (Mix_PlayMusic(music, times))
     cout << SDL_GetError() << endl;
-  }
 }
 
 void Music::Stop(int msToStop = 1500){
-  if (Mix_FadeOutMusic(msToStop)){
+  if (Mix_FadeOutMusic(msToStop))
     cout << SDL_GetError() << endl;
-  }
 }
 
 void Music::Open(string file){
-  if (!(music = Mix_LoadMUS(file.c_str()))){
+  if (!(music = Mix_LoadMUS(file.c_str())))
     cout << SDL_GetError() << endl;
-  }
 }
 
 bool Music::IsOpen(){
